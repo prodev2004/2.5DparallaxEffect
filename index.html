@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>2.5D Parallax Effect</title>
+    <!-- In this folder I have two images. One of the sky and on of a plane as png format. -->
+    <!-- For the source code and images, check the github link in the description. -->
+</head>
+<body>
+    <section>
+        <div class="bg_img"></div>
+        <h2 class="txt">2.5D Parallax Effect</h2>
+        <img src="airplane.png" class="plane">
+    </section>
+
+    <section>
+        <div>
+            <h2>Next Section</h2>
+            <h1>Subscribe...</h1>
+        </div>
+    </section>
+
+    <!-- now it's JS time -->
+
+    <script>
+        // selecting elements
+        const bg_img = document.querySelector('.bg_img');
+        const plane = document.querySelector('.plane');
+        const txt = document.querySelector('.txt');
+
+        window.addEventListener('scroll', () => {
+            // now this event will be called evrytime we scroll
+            // we can get the current position of the scroll with the scrollY
+            // so we're going to create this awesome effect with this trick
+
+            // since these values are large we're going to devide them
+            // you can mess around with the numbers
+            plane.style.transform = `scale(${window.scrollY / 6.5}%)`;
+            plane.style.bottom = `${window.scrollY / 1.2}px`;
+            plane.style.left = `${window.scrollY / .8}px`;
+            // so that's how it'll basically work
+            // we'll do the same for the sky and txt
+
+            // I think it's kinda lagging but at the end I'll show you the final result without lagging
+            // we're using calc since we cant it to be 100% as default and not smaller than that
+            bg_img.style.backgroundSize = `calc(100% + ${window.scrollY /2}px)`;
+
+            // we want it to be hidden to the right as default so we'll add 230% to that
+            txt.style.transform = `translate(${230 - window.scrollY / 3}%, -50%)`;
+        })
+    </script>
+</body>
+</html>
